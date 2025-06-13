@@ -1,0 +1,218 @@
+﻿<UserControl x:Class="EduAvis.Frontend.Windows.UC.UCAdministration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             Background="#1E2B38">
+    <Grid Margin="20">
+        <TabControl Background="#263545"
+                    BorderBrush="{x:Null}"
+                    Foreground="White"
+                    FontSize="14"
+                    Padding="10">
+            <TabItem Header="Teachers">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <TextBox x:Name="txtSearchTeachers"
+                                     Style="{StaticResource SearchBoxStyle}"
+                                     Text="{Binding SearchTeacherText, UpdateSourceTrigger=PropertyChanged}"
+                                     mat:HintAssist.Hint="Search teachers..."/>
+                            <mat:PackIcon Kind="Magnify"
+                                          Width="20"
+                                          Height="20"
+                                          Foreground="#808080"
+                                          VerticalAlignment="Center"
+                                          Margin="10,0,0,0"/>
+                        </Grid>
+                        <ComboBox Grid.Column="1"
+                                  Width="150"
+                                  Margin="10,0"
+                                  Background="#304559"
+                                  Foreground="White"
+                                  BorderBrush="#3498DB"
+                                  BorderThickness="0,0,0,1"
+                                  Padding="8"
+                                  mat:HintAssist.Hint="Filter by role"
+                                  ItemsSource="{Binding RoleFilterOptions}"
+                                  DisplayMemberPath="Name"
+                                  SelectedItem="{Binding SelectedRoleFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  x:Name="cbRoleFilter"/>
+                        <Button Grid.Column="2"
+                                x:Name="btnClearFiltersTeachers"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Background="#E74C3C"
+                                Click="btnClearFilter_Click"
+                                Margin="10,0">
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="FilterRemove" Width="18" Height="18" Margin="0,0,8,0"/>
+                                <TextBlock Text="CLEAR FILTERS"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Column="3"
+                                x:Name="btnAddTeacher"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Click="btnAddTeacher_Click"
+                                Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <mat:PackIcon Kind="AccountPlus" Width="18" Height="18" Margin="0,0,8,0"/>
+                                <TextBlock Text="ADD TEACHER"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <DataGrid Grid.Row="1"
+                              x:Name="dgTeachers"
+                              Style="{StaticResource CustomDataGridStyle}"
+                              ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                              CellStyle="{StaticResource CellStyle}"
+                              RowStyle="{StaticResource DataGridRowStyle}"
+                              ItemsSource="{Binding FilteredTeacherList}" SelectionChanged="dgTeachers_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="*"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                            <DataGridTextColumn Header="Role" Binding="{Binding Role.Name}" Width="150"/>
+                            <DataGridTemplateColumn Header="Actions" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource ActionButtonStyle}" ToolTip="Edit" Click="btnEditTeacher_Click">
+                                                <mat:PackIcon Kind="PencilOutline" Foreground="#F39C12"/>
+                                            </Button>
+                                            <Button Style="{StaticResource ActionButtonStyle}" ToolTip="Delete" Click="btnDeleteTeacher_Click">
+                                                <mat:PackIcon Kind="DeleteOutline" Foreground="#E74C3C"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Students">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <TextBox x:Name="txtSearchStudents"
+                                     Style="{StaticResource SearchBoxStyle}"
+                                     Text="{Binding SearchStudentText, UpdateSourceTrigger=PropertyChanged}"
+                                     mat:HintAssist.Hint="Search students..."/>
+                            <mat:PackIcon Kind="Magnify"
+                                          Width="20"
+                                          Height="20"
+                                          Foreground="#808080"
+                                          VerticalAlignment="Center"
+                                          Margin="10,0,0,0"/>
+                        </Grid>
+                        <ComboBox Grid.Column="1"
+                                  Width="150"
+                                  Margin="10,0"
+                                  Background="#304559"
+                                  Foreground="White"
+                                  BorderBrush="#3498DB"
+                                  BorderThickness="0,0,0,1"
+                                  Padding="8"
+                                  mat:HintAssist.Hint="Filter by group"
+                                  ItemsSource="{Binding GroupList}"
+                                  DisplayMemberPath="GroupName"
+                                  SelectedItem="{Binding SelectedGroupFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  x:Name="cbGroupFilter"/>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="btnClearFiltersStudents"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Background="#E74C3C"
+                                    Click="btnClearFiltersStudents_Click"
+                                    Margin="10,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <mat:PackIcon Kind="FilterRemove" Width="18" Height="18" Margin="0,0,8,0"/>
+                                    <TextBlock Text="CLEAR FILTERS"/>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="btnAddStudent"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Click="btnAddStudent_Click"
+                                    Margin="10,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <mat:PackIcon Kind="AccountPlus" Width="18" Height="18" Margin="0,0,8,0"/>
+                                    <TextBlock Text="ADD STUDENT"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <DataGrid Grid.Row="1"
+                              x:Name="dgStudents"
+                              Style="{StaticResource CustomDataGridStyle}"
+                              ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                              CellStyle="{StaticResource CellStyle}"
+                              RowStyle="{StaticResource DataGridRowStyle}"
+                              ItemsSource="{Binding FilteredStudentList}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="*"/>
+                            <DataGridTextColumn Header="NIA" Binding="{Binding Nia}" Width="*"/>
+                            <DataGridTextColumn Header="Group" Binding="{Binding GroupCode}" Width="150"/>
+                            <DataGridTemplateColumn Header="Actions" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource ActionButtonStyle}" ToolTip="Edit" Click="btnEditStudent_Click">
+                                                <mat:PackIcon Kind="PencilOutline" Foreground="#F39C12"/>
+                                            </Button>
+                                            <Button Style="{StaticResource ActionButtonStyle}" ToolTip="Delete" Click="btnDeleteStudent_Click">
+                                                <mat:PackIcon Kind="DeleteOutline" Foreground="#E74C3C"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Roles">
+                <DataGrid Grid.Row="1"
+                          x:Name="dgRoles"
+                          Style="{StaticResource CustomDataGridStyle}"
+                          ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                          CellStyle="{StaticResource CellStyle}"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          ItemsSource="{Binding RoleListAdmin}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Roles" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTemplateColumn Header="Actions" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource ActionButtonStyle}" ToolTip="Edit" Click="btnEditRole_Click">
+                                            <mat:PackIcon Kind="PencilOutline" Foreground="#F39C12"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

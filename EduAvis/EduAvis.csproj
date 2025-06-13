@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resource\Image\EduAvisNew.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\Image\arrow.png" />
+    <None Remove="Resource\Image\arrow_left.png" />
+    <None Remove="Resource\Image\EduAvisBig.png" />
+    <None Remove="Resource\Image\EduAvisMedium.png" />
+    <None Remove="Resource\Image\EduAvisMovement.gif" />
+    <None Remove="Resource\Image\EduAvisNew.ico" />
+    <None Remove="Resource\Image\EduAvisSmall.png" />
+    <None Remove="Resource\Image\eye_close.png" />
+    <None Remove="Resource\Image\eye_open.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resource\Image\EduAvisNew.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="5.1.0" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.10" />
+    <PackageReference Include="MySql.EntityFrameWorkCore" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.4.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Image\arrow.png" />
+    <Resource Include="Resource\Image\arrow_left.png" />
+    <Resource Include="Resource\Image\EduAvisBig.png" />
+    <Resource Include="Resource\Image\EduAvisMedium.png" />
+    <Resource Include="Resource\Image\EduAvisMovement.gif" />
+    <Resource Include="Resource\Image\EduAvisNew.ico" />
+    <Resource Include="Resource\Image\EduAvisSmall.png" />
+    <Resource Include="Resource\Image\eye_close.png" />
+    <Resource Include="Resource\Image\eye_open.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Frontend\Windows\Dialog\ModifyStudent.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Frontend\Windows\Dialog\ModifyTeacher.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>
